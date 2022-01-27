@@ -16,6 +16,7 @@ import {
   Text,
   useColorScheme,
   View,
+  Pressable
 } from 'react-native';
 
 import {
@@ -42,21 +43,34 @@ const App = () => {
   }
 
   return (
-    <View
-      style={[styles.center, { backgroundColor: useColorScheme() === 'dark' ? Colors.black : Colors.white },]}>
-      <Button title="Show an alert !" onPress={() => on_press()} />
-      <Hello message={"Hello World!"} />
-      <Button title="Change status" onPress={() => on_change_status()} />
-      <Text>Status value = {status.toString()}</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <View
+        style={[styles.center, { backgroundColor: useColorScheme() === 'dark' ? Colors.black : Colors.white },]}>
+        <Button title="Show an alert !" onPress={() => on_press()} />
+        <Hello message={"Hello World!"} />
+        <Pressable onPress={() => on_change_status()} >
+          <Text style={[{ backgroundColor: status ? "green" : "red" }, styles.button]}>Change Status</Text>
+        </Pressable>
+        <Text>Status value = {status.toString()}</Text>
+      </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   center: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
+  },
+  button: {
+    borderRadius: 3,
+    padding: 3,
+    margin: 10,
+    color: 'white'
   }
 });
 
