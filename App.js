@@ -22,6 +22,12 @@ import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
 
+const Hello = ({ message }) => {
+  const isDarkMode = useColorScheme() === 'dark';
+
+  return (<Text style={{ color: isDarkMode ? Colors.white : Colors.black }}>{message}</Text>);
+}
+
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -32,8 +38,8 @@ const App = () => {
   return (
     <View
       style={[styles.center, { backgroundColor: useColorScheme() === 'dark' ? Colors.black : Colors.white },]}>
-      <Text style={{ color: isDarkMode ? Colors.white : Colors.black }}>Hello World !</Text>
       <Button title="Press here !" onPress={() => on_press()} />
+      <Hello message={"Hello World!"} />
     </View>
   );
 };
