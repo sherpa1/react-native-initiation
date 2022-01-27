@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Button,
   SafeAreaView,
@@ -31,15 +31,23 @@ const Hello = ({ message }) => {
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
+  const [status, setStatus] = useState(false);
+
   const on_press = () => {
     alert("Hello World !");
+  }
+
+  const on_change_status = () => {
+    setStatus(status ? false : true);
   }
 
   return (
     <View
       style={[styles.center, { backgroundColor: useColorScheme() === 'dark' ? Colors.black : Colors.white },]}>
-      <Button title="Press here !" onPress={() => on_press()} />
+      <Button title="Show an alert !" onPress={() => on_press()} />
       <Hello message={"Hello World!"} />
+      <Button title="Change status" onPress={() => on_change_status()} />
+      <Text>Status value = {status.toString()}</Text>
     </View>
   );
 };
